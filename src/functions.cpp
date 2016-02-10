@@ -3,26 +3,26 @@
 
 double x1(std::array<double, 2> x, std::array<double, 2> y)
 {
-        return y[0] + x[1];
+  return y[0] + x[1];
 }
 
 double x2(std::array<double, 2> x, std::array<double, 2> y)
 {
-    return y[1] - x[0];
+  return y[1] - x[0];
 }
 
 double y1(std::array<double, 2> x, std::array<double, 2> y)
 {
-    return -3 * x[0] / pow(squarNorm(x), 3.0/2.0) + 2 * x[0] + y[1];
+  return -3 * x[0] / pow(squarNorm(x), 3.0/2.0) + 2 * x[0] + y[1];
 }
 
 double y2(std::array<double, 2> x, std::array<double, 2> y)
 {
-    return -3 * x[1] / pow(squarNorm(x), 3.0/2.0) - x[1] - y[0];
+  return -3 * x[1] / pow(squarNorm(x), 3.0/2.0) - x[1] - y[0];
 }
 
 double squarNorm(std::array<double, 2> x) {
-    return x[0] * x[0] + x[1] * x[1];
+  return x[0] * x[0] + x[1] * x[1];
 }
 
 std::array<double, 4> f(const std::array<double, 2> x, const std::array<double, 2> y)
