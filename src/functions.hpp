@@ -10,5 +10,5 @@ double y2(const std::array<double, 2> x, const std::array<double, 2> y);
 std::array<double, 4> f(const std::array<double, 2> x, const std::array<double, 2> y);
 
 double squarNorm(std::array<double, 2> x);
-
+bool isHuge(const std::array<double, 2> x, const std::array<double, 2> y);
 void progressBar(float progress, unsigned int current);

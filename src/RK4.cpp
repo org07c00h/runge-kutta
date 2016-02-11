@@ -5,22 +5,46 @@ RK4::RK4(const std::array<double, 2> x0, const std::array<double, 2> y0)
   x = x0;
   y = y0;
 
-  h = 1e-4;
+  initialValues[0] = x[0];
+  initialValues[1] = x[1];
+  initialValues[2] = y[0];
+  initialValues[3] = y[1];
 
-  mOutX.open("/tmp/x.dat");
-  mOutY.open("/tmp/y.dat");
+  h = 1e-7;
 
+  // mOutX.open("/tmp/dump/x_" + std::to_string(x[0]) + "_" + std::to_string(x[1]) +
+  // std::to_string(y[0]) + "_" + std::to_string(y[1]) + ".dat");
+  // mOutY.open("/tmp/dump/y_" + std::to_string(x[0]) + "_" + std::to_string(x[1]) +
+  // std::to_string(y[0]) + "_" + std::to_string(y[1]) + ".dat");
 }
 
 void RK4::solve()
 {
-  for (int i = 0; i < 1e4; i++)
+  int counter = 0;
+  std::ofstream goodData;
+  goodData.open("/tmp/foobar100.txt", std::ios_base::app);
+  while(counter < 1e8 &&
+    sqrt((x[0] - 1) * (x[0] - 1) + x[1] * x[1]) > 1e-4 &&
+    !isHuge(x, y))
   {
-    //progressBar(double(i)/1e4, i);
     this->nextStep();
+    counter++;
   }
-  mOutX.close();
-  mOutY.close();
+  // std::cout << "x:\t" << initialValues[0] << " " << initialValues[1] << std::endl;
+  // std::cout << "y:\t" << initialValues[2] << " " << initialValues[3] << std::endl;
+
+  if (counter == 1e5)
+  {
+    std::cout << "counter is huge" << std::endl;
+  }
+  else if (!isHuge(x, y))
+  {
+    std::cout << "OMG I FOUND IT!!!111111" << std::endl;
+    goodData << initialValues[0] << "\t" << initialValues[1] << "\t"
+      << initialValues[2] << "\t" << initialValues[3] << std::endl;
+  }
+  // mOutX.close();
+  // mOutY.close();
 }
 
 void RK4::nextStep()
@@ -59,9 +83,8 @@ void RK4::nextStep()
     x[j] += h / 6.0 * (k[0][j] + 2.0 * k[1][j] + 2.0 * k[2][j] + k[3][j]);
     y[j] += h / 6.0 * (k[0][j + 2] + 2.0 * k[1][j + 2] + 2.0 * k[2][j + 2] + k[3][j + 2]);
   }
-
-
-  mOutX << x[0] << "\t" << x[1] << "\r\n";
-  mOutY << y[0] << "\t" << y[1] << "\r\n";
+  //
+  // mOutX << x[0] << "\t" << x[1] << "\r\n";
+  // mOutY << y[0] << "\t" << y[1] << "\r\n";
 
 }

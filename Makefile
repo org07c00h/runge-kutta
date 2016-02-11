@@ -13,3 +13,5 @@ $(EXECUTABLE): $(OBJECTS)
 
 obj/%.o: src/%.cpp
 	$(CC) $(CFLAGS) -c -o $@ $<
+clean:
+	rm -rf obj/*

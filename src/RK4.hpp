@@ -3,7 +3,7 @@
 #include <array>
 #include <iostream>
 #include <fstream>
-
+#include <cmath>
 #include "functions.hpp"
 
 template <class T, unsigned I, unsigned J>
@@ -18,10 +18,12 @@ private:
   double h;
   std::array<double, 2> x;
   std::array<double, 2> y;
-
   std::ofstream mOutX;
   std::ofstream mOutY;
 
+  std::array<double, 4> initialValues;
+
   void nextStep();
+  // void twoSteps(); 
 
 };

@@ -1,5 +1,6 @@
 #include "functions.hpp"
 #include <cmath>
+#include <algorithm>
 
 double x1(std::array<double, 2> x, std::array<double, 2> y)
 {
@@ -42,6 +43,12 @@ void progressBar(float progress, unsigned int current)
   std::cout << "\r" << progress << "% completed: ";
   // std::cout << std::string(X, '|');
   std::cout.flush();
+}
 
+bool isHuge(const std::array<double, 2> x, const std::array<double, 2> y)
+{
+  double max1 = std::max(abs(x[0]), abs(x[1]));
+  // double max2 = std::max(abs(y[0]), abs(y[1]));
 
+  return max1 > 3;
 }
